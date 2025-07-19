@@ -1,0 +1,20 @@
+import("//build/templates/build_template.gni")
+
+build_rust("enumn") {
+  epoch = "0.1"
+  crate_type = "proc-macro"
+  sources = [ "//external/enumn/v0.1.14/src/lib.rs" ]
+  inputs = []
+  edition = "2021"
+  deps = [
+    "//external/proc-macro2/v1.0.89:proc_macro2",
+    "//external/quote/v1.0.37:quote",
+    "//external/syn/v2.0.87:syn",
+  ]
+
+  rustflags = [
+    "--cap-lints=allow",  # Suppress all warnings in crates.io crates
+    "--extern",
+    "proc_macro",
+  ]
+}
